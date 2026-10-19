@@ -1,9 +1,21 @@
 # VirtualMouse
 
 Control the mouse pointer with your hand through a webcam. MediaPipe tracks
-21 hand landmarks per frame, the index fingertip moves the cursor (with
-smoothing so it doesn't jitter), and a pinch between the index and middle
-fingers clicks.
+21 hand landmarks per frame and the script maps finger gestures to mouse
+actions.
+
+## Gestures
+
+| Fingers up | Action |
+|---|---|
+| Index only | Move the pointer |
+| Index + middle | Left click |
+| Index + middle, held close together | Double click |
+| Index + middle + ring | Right click |
+| All four fingers | Scroll in any direction |
+| Middle only | Quit |
+
+Press `q` in the webcam window to quit as well.
 
 Built in 2022 as an improved take on the classic OpenCV + MediaPipe virtual
 mouse.
@@ -13,8 +25,8 @@ mouse.
 - `cv2.VideoCapture` reads frames from the webcam (`0` is the built-in camera,
   `1` an external one).
 - `mediapipe.solutions.hands` finds one hand and returns its landmarks.
-- Fingertip coordinates are mapped from the camera frame to the screen size
-  (via `screeninfo`) and smoothed between frames.
+- The index fingertip is mapped from the camera frame to the screen size
+  (via `screeninfo`).
 - `pynput` moves the pointer and sends clicks.
 
 ## Run it
